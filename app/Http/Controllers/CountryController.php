@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CountryRequest;
+use App\Http\Requests\Country\StoreRequest;
+use App\Http\Requests\Country\UpdateRequest;
 use App\Http\Services\CountryService;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountryRequest $request)
+    public function store(StoreRequest $request)
     {
         
         if(!$this->countryService->store($request->validated()))
@@ -58,7 +59,7 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -69,7 +70,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('Country.edit', ['country' => Country::find($id)]);
     }
 
     /**
@@ -79,9 +80,11 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        if(!$this->countryService->update($id, $request->validated()))
+            return back()->with('error', 'There was error while updating.');
+        return redirect()->route('countries.index')->with('success', 'Country was succesfully updated.');
     }
 
     /**

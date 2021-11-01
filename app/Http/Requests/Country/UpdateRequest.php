@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Country;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CountryRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +24,10 @@ class CountryRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'ISO' => ['required', 'max:255'],
-            'title' => ['required', 'max:255']
+            'title' => ['required', 'max:255', 'unique:countries,title,'.$this->route('country')]
         ];
     }
     public function attributes()
@@ -34,7 +36,4 @@ class CountryRequest extends FormRequest
             'ISO' => 'ISO'
         ];
     }
-
-
-
 }

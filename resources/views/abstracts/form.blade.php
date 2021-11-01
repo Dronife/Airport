@@ -18,7 +18,7 @@
             @endisset
 
             @yield('inputs')
-            <button class="btn btn-success float-right">Create</button>
+            <button class="btn btn-success float-right">@isset($update) Update  @else Create @endisset</button>
         </form>
     </div>
 @endsection

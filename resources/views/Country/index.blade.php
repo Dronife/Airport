@@ -22,7 +22,7 @@
                     @method('delete')
                     <button class="btn btn-danger mx-2">Delete</button>
                 </form>
-                <a href="javascript:void(0)" class="mx-2 btn btn-success">Update</a>
+                <a href="{{route('countries.edit', $country->id)}}" class="mx-2 btn btn-success">Edit</a>
                 </div>
             </td>
         </tr>

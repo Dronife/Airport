@@ -14,7 +14,7 @@ class CountryService
             Country::create($attributes);
             DB::commit();
 
-        } catch (\Throwable$e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             return false;
         }
@@ -28,7 +28,21 @@ class CountryService
             Country::destroy($id);
             DB::commit();
 
-        } catch (\Throwable$e) {
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return false;
+        }
+        return true;
+    }
+
+    public function update($id, $attributes)
+    {
+        DB::beginTransaction();
+        try {
+            Country::find($id)->update($attributes);
+            DB::commit();
+
+        } catch (\Throwable $e) {
             DB::rollBack();
             return false;
         }
