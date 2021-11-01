@@ -21,5 +21,5 @@ Route::get('/test', function () {
 });
 
 Auth::routes();
-
+Route::resource('countries',App\Http\Controllers\CountryController::class);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
