@@ -20,4 +20,18 @@ class CountryService
         }
         return true;
     }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            Country::destroy($id);
+            DB::commit();
+
+        } catch (\Throwable$e) {
+            DB::rollBack();
+            return false;
+        }
+        return true;
+    }
 }

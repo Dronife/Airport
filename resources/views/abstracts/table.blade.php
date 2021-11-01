@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('modals.delete')
     <div class="container">
         @include('abstracts.messages')
         <div class="py-3 float-right">

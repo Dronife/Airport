@@ -92,6 +92,8 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!$this->countryService->destroy($id))
+            return back()->with('error', 'There was error in server.');
+        return back()->with('success', 'Country was succesfully deleted.');
     }
 }

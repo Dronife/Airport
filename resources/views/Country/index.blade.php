@@ -11,13 +11,19 @@
 @section('tbody')
     @foreach ($countries as $country)
         <tr>
-            <td>{{$country->id}}</td>
+            <td>{{ $country->id }}</td>
             @foreach ($countries->first()->getFillable() as $key)
                 <td>{{ $country->$key }}</td>
             @endforeach
             <td>
-                <a href="javascript:void(0)" class="mx-2">Delete</a>
-                <a href="javascript:void(0)" class="mx-2">Update</a>
+                <div class="row">
+                <form action="{{ route('countries.destroy', $country->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger mx-2">Delete</button>
+                </form>
+                <a href="javascript:void(0)" class="mx-2 btn btn-success">Update</a>
+                </div>
             </td>
         </tr>
     @endforeach
