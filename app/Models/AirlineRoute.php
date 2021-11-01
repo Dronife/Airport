@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Airline extends Model
+class AirlineRoute extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'country_id',
+        'rise_air_station_id',
+        'land_air_station_id',
+        'airline_id',
+        'time'
     ];
-    
-    public function country(){
-        return $this->belongsTo(Country::class, 'country_id', 'id');
-    }
 }

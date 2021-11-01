@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AirlineSchedules extends Migration
+class CreateAirlineRoutesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class AirlineSchedules extends Migration
      */
     public function up()
     {
-        Schema::create('airline_schedules', function (Blueprint $table) {
+        Schema::create('airline_routes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('rise_air_station_id')->unsigned();
             $table->integer('land_air_station_id')->unsigned();
+            $table->unique(['rise_air_station_id','land_air_station_id']);
             $table->integer('airline_id')->unsigned();
             $table->foreign('rise_air_station_id')->references('id')->on('air_stations')->onDelete('cascade');
             $table->foreign('land_air_station_id')->references('id')->on('air_stations')->onDelete('cascade');
@@ -33,6 +34,6 @@ class AirlineSchedules extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('airline_routes');
     }
 }

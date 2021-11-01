@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Airline;
+use App\Models\AirStation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/test', function () {
+    dd(AirStation::find(1)->allRountes());
 });
