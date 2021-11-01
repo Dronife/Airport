@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="container">
+        @include('abstracts.messages')
         <div class="py-3 float-right">
-            <a class="btn btn-primary" href="javascript:void(0)">Create new</a>
+            <a class="btn btn-primary" href="{{ $createUrl ?? 'javascript:void(0)' }}">Create new</a>
         </div>
         <table class="table table-striped">
             <thead class="thead-dark">

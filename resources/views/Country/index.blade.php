@@ -1,4 +1,4 @@
-@extends('abstracts.table')
+@extends('abstracts.table', ['createUrl' => route('countries.create')])
 
 @section('thead')
     <td>id</td>

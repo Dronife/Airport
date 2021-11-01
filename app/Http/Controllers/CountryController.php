@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CountryRequest;
+use App\Http\Services\CountryService;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CountryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->countryService = new CountryService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +33,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Country.create');
     }
 
     /**
@@ -33,9 +42,12 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        //
+        
+        if(!$this->countryService->store($request->validated()))
+            return back()->with('error', 'There was something wrong with your inputs.');
+        return redirect()->route('countries.index')->with('success', 'Country was successfully created.');
     }
 
     /**
