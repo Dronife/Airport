@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             AirStationSeeder::class,
             AirlineSeeder::class,
+            AirlineRouteSeeder::class,
         ]);
     }
 }
