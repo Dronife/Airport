@@ -10,7 +10,7 @@ class AIrlineRouteService extends AbstractService
 
     public function __construct()
     {
-        parent::__construct('airlines');
+        parent::__construct('airline-routes');
     }
     public function store($attributes)
     {
@@ -24,6 +24,20 @@ class AIrlineRouteService extends AbstractService
             return $this->returnWithErrorMessage();
         }
         return $this->returnWithSuccessMessage('Airline route was successfully created.');
+    }
+
+    public function update($id, $attributes)
+    {
+        DB::beginTransaction();
+        try {
+            AirlineRoute::find($id)->update($attributes);
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->returnWithErrorMessage();
+        }
+        return $this->returnWithSuccessMessage('Airline route was successfully updated.');
     }
 
 }

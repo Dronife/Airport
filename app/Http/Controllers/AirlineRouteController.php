@@ -73,7 +73,12 @@ class AirlineRouteController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('airline-routes.edit', 
+        [
+            'route' => AirlineRoute::find($id),
+            'airlines' => Airline::all(),
+            'airports' => AirStation::all(),
+        ]);
     }
 
     /**
@@ -83,9 +88,9 @@ class AirlineRouteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        return $this->airlineRouteService->update($id, $request->validated());
     }
 
     /**
