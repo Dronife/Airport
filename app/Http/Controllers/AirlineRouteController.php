@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Route\StoreRequest;
+use App\Http\Services\AIrlineRouteService;
+use App\Models\Airline;
 use App\Models\AirlineRoute;
+use App\Models\AirStation;
 use Illuminate\Http\Request;
 
 class AirlineRouteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->airlineRouteService = new AIrlineRouteService();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,7 @@ class AirlineRouteController extends Controller
      */
     public function index()
     {
-        return view('airline-routes.index',['routes' => AirlineRoute::all()]);
+        return view('airline-routes.index', ['routes' => AirlineRoute::all()]);
     }
 
     /**
@@ -24,7 +35,12 @@ class AirlineRouteController extends Controller
      */
     public function create()
     {
-        //
+        return view('airline-routes.create',
+        [
+            'airports' => AirStation::all(),
+            'airlines' => Airline::all(),
+        ]
+        );
     }
 
     /**
@@ -33,9 +49,9 @@ class AirlineRouteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return $this->airlineRouteService->store($request->validated());
     }
 
     /**
