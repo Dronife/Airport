@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Airline\StoreRequest;
+use App\Http\Services\AirlineService;
 use App\Models\Airline;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AirlineController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->airlineService = new AirlineService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +33,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        //
+        return view('Airlines.create',['countries' => Country::all()]);
     }
 
     /**
@@ -33,9 +42,9 @@ class AirlineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return  $this->airlineService->store($request->validated());
     }
 
     /**
