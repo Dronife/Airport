@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AirStation;
 use Illuminate\Http\Request;
 
-class AirStationController extends Controller
+class AirportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class AirStationController extends Controller
      */
     public function index()
     {
-        //
+        return view('Airport.index', ['airports' => AirStation::all()]);
     }
 
     /**

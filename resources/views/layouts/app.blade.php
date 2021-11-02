@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href='{{route('countries.index')}}'>Countries</a></li>
-                        <li class="nav-item"><a class="nav-link" href='javascript:void(0)'>Airpots</a></li>
+                        <li class="nav-item"><a class="nav-link"href='{{route('airports.index')}}'>Airpots</a></li>
                         <li class="nav-item"><a class="nav-link" href='javascript:void(0)'>Airlines</a></li>
                         <li class="nav-item"><a class="nav-link" href='javascript:void(0)'>Airline routes</a></li>
                     </ul>
