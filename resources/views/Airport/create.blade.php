@@ -1,4 +1,4 @@
-@extends('abstracts.form', ['action' => route('countries.store'), 'headline' => 'Create airport'])
+@extends('abstracts.form', ['action' => route('airports.store'), 'headline' => 'Create airport'])
 
 @section('inputs')
 
@@ -22,6 +22,7 @@
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{asset('js/map/airports/create/getCoordinatesOnMouseClick.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/map/airports/create/setMarkerCoordinatesOnInit.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/map/airports/create/updateMapOnInputChange.js')}}"></script>
 @endpush
 

@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Airport\StoreRequest;
+use App\Http\Services\AirportService;
 use App\Models\AirStation;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AirportController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->airportService = new AirportService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +42,13 @@ class AirportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        if (!$this->airportService->store($request->validated())) {
+            return back()->with('error', 'There was something wrong on server.');
+        }
+
+        return redirect()->route('airports.index')->with('success', 'Airport was successfully created.');
     }
 
     /**
@@ -81,6 +93,11 @@ class AirportController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        if (!$this->airportService->destroy($id)) {
+            return back()->with('error', 'There was something wrong on server.');
+        }
+
+        return redirect()->route('airports.index')->with('success', 'Airport was successfully deleted.');
     }
 }
