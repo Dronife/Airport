@@ -101,6 +101,6 @@ class AirlineRouteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->airlineRouteService->destroy($id);
     }
 }

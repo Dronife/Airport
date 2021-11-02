@@ -40,4 +40,19 @@ class AIrlineRouteService extends AbstractService
         return $this->returnWithSuccessMessage('Airline route was successfully updated.');
     }
 
+    
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            AirlineRoute::destroy($id);
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->returnWithErrorMessage();
+        }
+        return $this->returnWithSuccessMessage('Airline route was successfully deleted.');
+    }
+
 }
