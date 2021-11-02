@@ -24,4 +24,5 @@ Auth::routes();
 Route::resource('countries',App\Http\Controllers\CountryController::class);
 Route::resource('airports',App\Http\Controllers\AirportController::class);
 Route::resource('airlines',App\Http\Controllers\AirlineController::class);
+Route::resource('airline-routes',App\Http\Controllers\AirlineRouteController::class);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

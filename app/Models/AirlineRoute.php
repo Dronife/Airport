@@ -14,4 +14,18 @@ class AirlineRoute extends Model
         'airline_id',
         'time'
     ];
+
+    public function getRiseAirStationAttribute()
+    {
+        return AirStation::find($this->rise_air_station_id)->title;
+    }
+    public function getLandAirStationAttribute()
+    {
+        return AirStation::find($this->land_air_station_id)->title;
+    }
+
+    public function getAirlineAttribute(){
+        return Airline::find($this->airline_id)->title;
+    }
+
 }
