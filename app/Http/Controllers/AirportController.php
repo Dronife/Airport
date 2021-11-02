@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AirStation;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AirportController extends Controller
@@ -24,7 +25,7 @@ class AirportController extends Controller
      */
     public function create()
     {
-        //
+        return view('Airport.create', ['countries' => Country::all()]);
     }
 
     /**

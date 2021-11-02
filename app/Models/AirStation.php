@@ -16,6 +16,10 @@ class AirStation extends Model
         'lat'
     ];
 
+    public function getCountryAttribute(){
+        return Country::find($this->country_id)->title;
+    }
+
     public function country(){
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
