@@ -45,11 +45,7 @@ class AirportController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        if (!$this->airportService->store($request->validated())) {
-            return back()->with('error', 'There was something wrong on server.');
-        }
-
-        return redirect()->route('airports.index')->with('success', 'Airport was successfully created.');
+        return $this->airportService->create($request->validated());
     }
 
     /**
@@ -83,7 +79,7 @@ class AirportController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        //
+        return $this->airportService->update($id, $request->validated());
     }
 
     /**
@@ -95,10 +91,6 @@ class AirportController extends Controller
     public function destroy($id)
     {
 
-        if (!$this->airportService->destroy($id)) {
-            return back()->with('error', 'There was something wrong on server.');
-        }
-
-        return redirect()->route('airports.index')->with('success', 'Airport was successfully deleted.');
+        return $this->airportService->destroy($id);
     }
 }
