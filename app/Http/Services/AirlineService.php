@@ -5,9 +5,13 @@ namespace App\Http\Services;
 use App\Models\Airline;
 use Illuminate\Support\Facades\DB;
 
-class AirlineService
+class AirlineService extends AbstractService
 {
 
+    public function __construct()
+    {
+        parent::__construct('airlines');
+    }
     public function store($attributes)
     {
         DB::beginTransaction();
@@ -17,9 +21,37 @@ class AirlineService
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return back()->with('error', 'There was something wrong on server.');
+            return $this->returnWithErrorMessage();
         }
-        return redirect()->route('airlines.index')->with('success', 'Airport was successfully deleted.');
+        return $this->returnWithSuccessMessage('Airline was successfully created.');
+    }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            Airline::destroy($id);
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->returnWithErrorMessage();
+        }
+        return $this->returnWithSuccessMessage('Airline was successfully deleted.');
+    }
+
+    public function update($id, $attributes)
+    {
+        DB::beginTransaction();
+        try {
+            Airline::find($id)->update($attributes);
+            DB::commit();
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->returnWithErrorMessage();
+        }
+        return $this->returnWithSuccessMessage('Airline was successfully updated.');
     }
 
     

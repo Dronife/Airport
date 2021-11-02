@@ -137,8 +137,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'country_id' => [
+            'numeric' => 'Selected country had bad value.',
         ],
     ],
 

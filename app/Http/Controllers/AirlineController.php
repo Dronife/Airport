@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Airline\StoreRequest;
+use App\Http\Requests\Airline\UpdateRequest;
 use App\Http\Services\AirlineService;
 use App\Models\Airline;
 use App\Models\Country;
@@ -23,7 +24,7 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        return view('Airlines.index',['airlines' => Airline::all()] );
+        return view('Airline.index',['airlines' => Airline::all()] );
     }
 
     /**
@@ -33,7 +34,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        return view('Airlines.create',['countries' => Country::all()]);
+        return view('Airline.create',['countries' => Country::all()]);
     }
 
     /**
@@ -66,7 +67,7 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('Airline.edit', ['countries' => Country::all(), 'airline' => Airline::find($id)]);
     }
 
     /**
@@ -76,9 +77,9 @@ class AirlineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+       return $this->airlineService->update($id, $request->validated());
     }
 
     /**
@@ -89,6 +90,7 @@ class AirlineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return  $this->airlineService->destroy($id);
+
     }
 }
