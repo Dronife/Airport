@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Airport\StoreRequest;
+use App\Http\Requests\Airport\UpdateRequest;
 use App\Http\Services\AirportService;
 use App\Models\AirStation;
 use App\Models\Country;
@@ -70,7 +71,7 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('Airport.edit', ['countries' => Country::all(), 'airport' => AirStation::find($id)]);
     }
 
     /**
@@ -80,7 +81,7 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         //
     }
