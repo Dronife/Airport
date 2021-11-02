@@ -5,8 +5,14 @@ namespace App\Http\Services;
 use App\Models\Country;
 use Illuminate\Support\Facades\DB;
 
-class CountryService
+class CountryService extends AbstractService
 {
+
+    public function __construct()
+    {
+        parent::__construct('countries');
+    }
+
     public function store($attributes)
     {
         DB::beginTransaction();
@@ -16,9 +22,9 @@ class CountryService
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return false;
+            return $this->returnWithErrorMessage();
         }
-        return true;
+        return $this->returnWithSuccessMessage('Country was successfully created.');
     }
 
     public function destroy($id)
@@ -30,9 +36,9 @@ class CountryService
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return false;
+            return $this->returnWithErrorMessage();
         }
-        return true;
+        return $this->returnWithSuccessMessage('Country was successfully deleted.');
     }
 
     public function update($id, $attributes)
@@ -44,8 +50,8 @@ class CountryService
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return false;
+            return $this->returnWithErrorMessage();
         }
-        return true;
+        return $this->returnWithSuccessMessage('Country was successfully updated.');
     }
 }

@@ -46,9 +46,7 @@ class CountryController extends Controller
     public function store(StoreRequest $request)
     {
         
-        if(!$this->countryService->store($request->validated()))
-            return back()->with('error', 'There was something wrong with your inputs.');
-        return redirect()->route('countries.index')->with('success', 'Country was successfully created.');
+        return $this->countryService->store($request->validated());
     }
 
     /**
@@ -82,9 +80,7 @@ class CountryController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        if(!$this->countryService->update($id, $request->validated()))
-            return back()->with('error', 'There was error while updating.');
-        return redirect()->route('countries.index')->with('success', 'Country was succesfully updated.');
+        return $this->countryService->update($id, $request->validated());
     }
 
     /**
@@ -95,8 +91,6 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        if(!$this->countryService->destroy($id))
-            return back()->with('error', 'There was error in server.');
-        return back()->with('success', 'Country was succesfully deleted.');
+        return $this->countryService->destroy($id);
     }
 }
